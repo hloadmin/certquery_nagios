@@ -1,0 +1,1 @@
+# certquery_nagios
