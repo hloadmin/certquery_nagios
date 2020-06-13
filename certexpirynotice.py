@@ -1,9 +1,9 @@
 #!/usr/bin/python3.8
 import os, sys
-from query_cert_Exp import cert
+import query_cert_Exp as certquery
 
 try:
-    cert()
+    certquery.main()
     with open("/mnt/d/LinuxRoot/python/qualys/NRPE_status") as file: 
         status = (file.readline()).rstrip()
         if status == '0':

@@ -20,7 +20,7 @@ def build_token():
         return bearer_token
 
 
-def cert():
+def main():
     url = 'https://gateway.qg3.apps.qualys.com/certview/v1/certificates'
     payload = '{ \n\t"filter" : \t"selfSigned:false and expiryGroup:In 100 Days and issuer.organization:\'Let\'s Encrypt\'",\n\t"certificateDetails": "basic",\n\t"pageNumber": 0, \n\t"pageSize" : 10\n}'
     jwt_token = build_token()
@@ -52,19 +52,19 @@ def cert():
             san = cert['subjectAlternativeNames']
             san_dns = san['DNS Name']
             if san_dns != [] and len(san_dns) > 1:
-                print cert['dn'] + 'with ' + str(len(san_dns)) + ' SAN domains'
+                print(cert['dn'] + 'with ' + str(len(san_dns)) + ' SAN domains')
                 NRPE_list.append(cert['dn'])
             else:
-                print cert['dn'] + ' - Standalone Cert'
+                print(cert['dn'] + ' - Standalone Cert')
                 NRPE_list.append(cert['dn'])
 
-        print NRPE_list
+        print(NRPE_list)
         try:
             NRPEWriteTxtFile = open('NRPE_list', 'w')
             NRPEWriteTxtFile.write(str(NRPE_list))
             NRPEWriteTxtFile.close()
         except IOError:
-            print( 'error opening file')
+            print('error opening file')
 
 
 if __name__ == '__main__':
