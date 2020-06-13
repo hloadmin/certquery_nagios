@@ -1,9 +1,16 @@
 #!/usr/bin/python3.8
+# Importing credentials mapping class.
 from credlib import credential
+# Python library for HTTPS requests. 
 import requests
+#mycredentials python file is where login credentials are stored as best practice. WHen used in production modify the code to read from ENV variable.
+#Below, I am importing qualys_prod credentials. You can store other crendentials here and import them to use withing this function.
 from mycredentials import qualys_prod
 import os, time, datetime
 
+#the function below, is called from query_cert_Exp python code to login and store Tokens for qualys. The code here, performs simply mapping of credentials. 
+# note, we are using the code under if condition, as we are only passing one argument from calling section. 
+# the code under elif, can be used if you want to directly pass username, password etc from code, like legacy.
 def system_login(*args): # this is new function definition
 
     if len(args) == 1 and isinstance(args[0], credential):
@@ -20,6 +27,7 @@ def system_login(*args): # this is new function definition
     else:
         raise ValueError('Invalid arguments')
 
+    #call function to login to qualys and get/store token on local file system in a file called .secret. 
     get_token(hostname, username, password, permissions) # this is original system login call
 
 def get_token(hostname,username,password,permissions):	
@@ -32,19 +40,4 @@ def get_token(hostname,username,password,permissions):
     WriteTxtFile = open(".secret", "w")
     WriteTxtFile.write(response.text)
     WriteTxtFile.close()
-
-
-try:
-    with open('.secret') as f:
-        token_age_minutes = (time.time() - (os.stat('.secret').st_mtime))/60
-        if (token_age_minutes < 120):
-            print("Valid JTW Token available. Using it to run operations.")
-            #print(f.readlines())
-            #print(f.read().replace('\n', ''))
-        else:
-            print("Token Expired, generating new token")
-            system_login(qualys_prod)
-except IOError:
-    print("Generating JTW Token")    
-    system_login(qualys_prod)
     
