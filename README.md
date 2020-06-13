@@ -1,4 +1,7 @@
 # certquery_nagios
+### Thanks [Craz](https://stackoverflow.com/users/1572749/craz) for information on how to securely store credentials.
+### References: Qualys API documentation. 
+
 
 Nagios NRPE plugin, (Can also be used a standalone Python module)
 
