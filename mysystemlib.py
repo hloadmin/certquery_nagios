@@ -1,5 +1,5 @@
 #!/usr/bin/python3.8
-# Importing credentials mapping class.
+# Importing credentials mapping.
 from credlib import credential
 # Python library for HTTPS requests. 
 import requests

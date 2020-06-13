@@ -1,6 +1,6 @@
 #!/usr/bin/python3.8
 import os, sys
-#Import query_cert_Exp python code.
+#Import query_cert_Exp python function.
 #If you are not using Nagios, you can simply ignore this certexpirynotice file, and just use the other python files in standalone mode. 
 import query_cert_Exp as certquery
 

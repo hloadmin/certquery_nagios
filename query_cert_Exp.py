@@ -1,6 +1,5 @@
 #!/usr/bin/python3.8
 import requests, os, time, json
-
 #mysystemlib python file is where login modules are written for simplicity and code reuse. 
 import mysystemlib as token
 #mycredentials python file is where login credentials are stored as best practice. WHen used in production modify the code to read from ENV variable.
