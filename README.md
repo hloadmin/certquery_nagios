@@ -9,10 +9,16 @@ Nagios NRPE plugin, (Can also be used a standalone Python module)
   3. NRPE Server and utils installed on Linux source server and reachable from Nagios/iCinga server on port tcp 5666. Tested and works with NRPE v3 and above. Follow along this [link](https://www.binarycomputer.solutions/installing-nrpe-in-ubuntu) and update IP and permissions as per your local environment.
 
 ## Installation.
-Clone the git under your python3.8 working directory. If using Nagios NRPE, create a symlink:
-cd /path/to/working/directoty
-ln -s certexpirynotice.py /usr/lib/nagios/plugins/certexpirynotice.py
-if using 64 bit NRPE, path may be /usr/lib64/nagios/plugins.
+```
+#which python3.8
+/usr/lib/python3.8
+#git --version
+git version 2.25.1
+
+#cd /path/to/working/directory
+#git clone https://github.com/hloadmin/certquery_nagios.git && cd certquery_nagios
+#ln -s certexpirynotice.py /usr/lib/nagios/plugins/certexpirynotice.py 
+```
 
 Note, setup of Nagios NRPE client is not covered here. Check for 3 things:
 1. In /etc/nagios/nrpe.cfg - In allowed hosts, ensure Nagios server IP is listed. 
